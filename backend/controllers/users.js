@@ -4,8 +4,12 @@ const addUser = ({ id, name, room }) => {
     name = name.trim().toLowerCase();
     room = room.trim().toLowerCase();
 
+    if (!name || !room) {
+        return { error: 'Username and room required.'};
+    }
+
     // Check if existing user
-    const userExists = users.find(user => user.name === name && user.room && room);
+    const userExists = users.find(user => user.name === name && user.room === room);
     if (userExists) {
         return { error: 'Username is taken' };
     }
